@@ -29,7 +29,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City findById(Long id) {
+    public City findById(String id) {
         String key = getString(id);
         City city = redisService.get(key, City.class);
         if (city != null) {
@@ -49,14 +49,14 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City findByProvinceId(Long id) {
+    public City findByProvinceId(String id) {
         return cm.findByProvinceId(id);
     }
 
     @Override
-    public int updateById(City city) {
-        int result = cm.updateById(city);
-        Long id = city.getId();
+    public Boolean updateById(City city) {
+        cm.updateById(city);
+        String id = city.getId();
         String key = getString(id);
         City c = redisService.get(key, city.getClass());
         if (c != null) {
@@ -67,28 +67,28 @@ public class CityServiceImpl implements CityService {
             redisService.put(key, city);
             LOGGER.info("将此次更新的数据插入缓存" + city.toString());
         }
-        return result;
+        return Boolean.TRUE;
     }
 
     @Override
-    public int deleteById(Long id) {
-        int result = cm.deleteById(id);
+    public Boolean deleteById(String id) {
+        cm.deleteById(id);
         String key = getString(id);
         redisService.remove(key);
         LOGGER.info("将数据从缓存中删除,id为"+key);
-        return result;
+        return Boolean.TRUE;
     }
 
     @Override
-    public Long insertCity(City city) {
+    public String insertCity(City city) {
+        city.generateId();
         cm.insertCity(city);
-        Long id = city.getId();
-        String key = getString(id);
+        String key = getString(city.getId());
         redisService.put(key,city);
-        return id;
+        return city.getId();
     }
 
-    private String getString(Long id) {
+    private String getString(String id) {
         return "city_" + id;
     }
 }

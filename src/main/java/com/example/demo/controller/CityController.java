@@ -29,8 +29,7 @@ public class CityController {
 
     @GetMapping(value = "/city/{id}")
     public String findById(@PathVariable String id, Model model) {
-        Long Id = Long.parseLong(id);
-        City city = cs.findById(Id);
+        City city = cs.findById(id);
         model.addAttribute("city", city);
         return "show";
     }
@@ -49,7 +48,7 @@ public class CityController {
     }
 
     @DeleteMapping("/city/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") String id) {
         cs.deleteById(id);
         return "redirect:/";
     }

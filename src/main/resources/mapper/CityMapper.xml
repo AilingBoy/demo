@@ -25,7 +25,7 @@
         where city_name = #{cityName}
     </select>
 
-    <select id="findById" resultMap="result_city" parameterType="java.lang.Long">
+    <select id="findById" resultMap="result_city" parameterType="java.lang.String">
         select
         <include refid="Base_city_List"/>
         from city
@@ -39,15 +39,15 @@
         where province_id = #{provinceId}
     </select>
 
-    <insert id="insertCity" parameterType="com.example.demo.domain.City" useGeneratedKeys="true" keyProperty="id">
-        insert into city (province_id,city_name,description) value (#{provinceId},#{cityName},#{description})
+    <insert id="insertCity" parameterType="com.example.demo.domain.City">
+        insert into city (id,province_id,city_name,description) value (#{id},#{provinceId},#{cityName},#{description})
     </insert>
 
     <update id="updateById" parameterType="com.example.demo.domain.City">
         update city set province_id=#{provinceId},city_name=#{cityName},description=#{description} where id=#{id}
     </update>
 
-    <delete id="deleteById" parameterType="java.lang.Long">
+    <delete id="deleteById" parameterType="java.lang.String">
         delete from city where id =#{id}
     </delete>
 </mapper>

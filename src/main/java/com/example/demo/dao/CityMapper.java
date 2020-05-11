@@ -8,15 +8,15 @@ import java.util.List;
 public interface CityMapper {
     List<City> findAll();
 
-    City findById(Long id);
+    City findById(String id);
 
     City findByName(String cityName);
 
-    City findByProvinceId(Long id);
+    City findByProvinceId(String id);
 
-    int updateById(City city);
+    void updateById(City city);
 
-    int deleteById(Long id);
+    void deleteById(String id);
 
-    int insertCity(City city);
+    void insertCity(City city);
 }

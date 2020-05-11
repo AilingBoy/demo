@@ -65,6 +65,13 @@
             <version>1.3.2.RELEASE</version>
         </dependency>
 
+        <!--hutool依赖导入-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.5.9</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-data-mongodb</artifactId>-->

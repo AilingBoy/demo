@@ -1,17 +1,12 @@
 package com.example.demo.domain;
 
+import com.example.demo.base.BaseModel;
 import lombok.Data;
 
-import java.io.Serializable;
 
 @Data
-public class City implements Serializable {
+public class City extends BaseModel {
     private static final long serialVersionUID = 5565794179055362587L;
-    /**
-     * 城市编号
-     */
-    private Long id;
-
     /**
      * 省份编号
      */
@@ -31,13 +26,6 @@ public class City implements Serializable {
     public City() {
     }
 
-    public City(Long id, Long provinceId, String cityName, String description) {
-        this.id = id;
-        this.provinceId = provinceId;
-        this.cityName = cityName;
-        this.description = description;
-    }
-
     public City(Long provinceId, String cityName, String description) {
         this.provinceId = provinceId;
         this.cityName = cityName;
@@ -52,7 +40,7 @@ public class City implements Serializable {
     @Override
     public String toString() {
         return "City{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", provinceId=" + provinceId +
                 ", cityName='" + cityName + '\'' +
                 ", description='" + description + '\'' +

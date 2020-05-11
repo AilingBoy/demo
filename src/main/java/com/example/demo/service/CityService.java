@@ -9,15 +9,15 @@ public interface CityService {
 
     List<City> findAll();
 
-    City findById(Long id);
+    City findById(String id);
 
     City findByName(String cityName);
 
-    City findByProvinceId(Long id);
+    City findByProvinceId(String id);
 
-    int updateById(City city);
+    Boolean updateById(City city);
 
-    int deleteById(Long id);
+    Boolean deleteById(String id);
 
-    Long insertCity(City city);
+    String insertCity(City city);
 }
