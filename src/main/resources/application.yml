@@ -1,0 +1,32 @@
+server:
+  port: 9000
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: mysql
+    password: mysql
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: oracleRedis
+
+    jedis:
+      pool:
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+        max-active: 8
+    timeout: 0
+
+mybatis:
+ # mapper-location: mapper/*.xml
+  type-aliases-package: com.example.demo.domain
+  mapper-locations: mapper/*.xml
+ # type-handlers-package: com.example.demo.domain

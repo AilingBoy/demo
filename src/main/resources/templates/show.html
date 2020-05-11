@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+</head>
+<body>
+<form th:action="@{/city}" method="post" >
+    <input type="hidden" value="PUT" name="_method"/>
+    <input type="text" name="id" th:value="${city.id}" readonly="readonly"/><br>
+    <input type="text" name="provinceId" th:value="${city.provinceId}"/><br>
+    <input type="text" name="cityName" th:value="${city.cityName}"/><br>
+    <input type="text" name="description" th:value="${city.description}"/><br>
+    <input type="submit" value="修改"/>
+</form>
+
+<!--<form th:action="@{/city/{id}(id=${city.id})}" th:object="${city}" method="put" th:method="put">-->
+<!--    <input type="text" th:field="*{id}"/>-->
+<!--    <input type="text" th:field="*{provinceId}"/>-->
+<!--    <input type="text" th:field="*{cityName}"/>-->
+<!--    <input type="text" th:field="*{description}"/>-->
+<!--    <input type="submit"/>-->
+<!--</form>-->
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>序号</td>
+        <td>省份序号</td>
+        <td>城市</td>
+        <td>描述</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="city:${citylist}">
+        <td><a th:href="@{/city/{id}(id=${city.id})}">
+            <p th:text="${city.id}"/>
+        </a></td>
+        <td><p th:text="${city.provinceId}"/></td>
+        <td><p th:text="${city.cityName}"/></td>
+        <td><p th:text="${city.description}"/></td>
+        <td>
+            <form th:action="@{/city/{id}(id=${city.id})}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="id" th:value="${city.id}">
+                <input type="submit" value="删除">
+            </form>
+        </td>
+    </tr>
+</table>
+<a href="topage?url=add.html">新增</a>
+
+</body>
+</html>
