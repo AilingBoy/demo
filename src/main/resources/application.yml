@@ -1,5 +1,7 @@
 server:
   port: 9000
+  tomcat:
+    uri-encoding: UTF-8
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -10,7 +12,11 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
   redis:
     database: 0
     host: localhost

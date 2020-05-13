@@ -38,7 +38,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(accessInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(accessInterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/index")
+                .excludePathPatterns("/topage")
+                .excludePathPatterns("resources/templates/index.html","resources/templates/add2.html")
+                .excludePathPatterns("/users");
     }
 
 

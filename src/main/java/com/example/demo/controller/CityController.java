@@ -1,56 +1,58 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.City;
+import com.example.demo.result.JsonResult;
 import com.example.demo.service.CityService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @Slf4j
+@Api(value = "城市",tags = "城市管理")
 public class CityController {
     @Autowired
     private CityService cs;
 
     private static final Logger logger= LoggerFactory.getLogger(CityController.class);
-
+    @ApiOperation("列表展示")
     @GetMapping(value = {"/city", "/"})
-    public String findall(Model model) {
+    public JsonResult findall() {
         List<City> list = cs.findAll();
-        model.addAttribute("citylist", list);
-        return "getall";
+        return JsonResult.data(list);
     }
 
+    @ApiOperation("查询city")
     @GetMapping(value = "/city/{id}")
-    public String findById(@PathVariable String id, Model model) {
+    public JsonResult findById(@PathVariable String id, Model model) {
         City city = cs.findById(id);
-        model.addAttribute("city", city);
-        return "show";
+        return JsonResult.data(city);
     }
 
+    @ApiOperation("添加city")
     //    @PostMapping("/city")
     @RequestMapping(value = "/city", method = RequestMethod.POST)
-    public String updateCity(City city) {
-        cs.insertCity(city);
-        return "redirect:/";
+    public JsonResult updateCity(City city) {
+        return JsonResult.data(cs.insertCity(city));
     }
 
+    @ApiOperation("修改city")
     @PutMapping("/city")
-    public String update(City city) {
-        cs.updateById(city);
-        return "redirect:/";
+    public JsonResult update(City city) {
+        return JsonResult.data(cs.updateById(city));
     }
 
+    @ApiOperation("删除city")
     @DeleteMapping("/city/{id}")
-    public String delete(@PathVariable("id") String id) {
-        cs.deleteById(id);
-        return "redirect:/";
+    public JsonResult delete(@PathVariable("id") String id) {
+        return JsonResult.data(cs.deleteById(id));
     }
 
 }

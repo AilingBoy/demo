@@ -16,6 +16,7 @@ public class Users extends BaseModel {
      */
     private String password;
 
+
     public Users(){}
 
     public Users(String username,String password){

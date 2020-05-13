@@ -16,12 +16,18 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class AccessInterceptor implements HandlerInterceptor {
 
-    private static final Logger logger= LoggerFactory.getLogger(AccessInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccessInterceptor.class);
 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info("Request URL : {},IP Address : {}", request.getRequestURI(), RequestUtil.getIpAddress(request));
+//        String token = request.getHeader("token");
+//        if (token == null) {
+//            response.setHeader("Content-Type", MediaType.TEXT_PLAIN_VALUE);
+//            response.getWriter().write("请先登录!");
+//            return Boolean.FALSE;
+//        }
         return Boolean.TRUE;
     }
 

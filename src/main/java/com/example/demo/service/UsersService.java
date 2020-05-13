@@ -6,13 +6,17 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UsersService {
 
-    Users findById(String id);
+    Users findById(String id) throws Exception;
 
-    Boolean updateById(Users users);
+    Boolean updateById(Users users) throws Exception;
 
-    Boolean deleteById(String id);
+    Boolean deleteById(String id) throws Exception;
 
-    String insertUsers(Users users);
+    String insertUsers(Users users) throws Exception;
 
-    Boolean getByName(String username);
+    Boolean getByName(String username) throws Exception;
+
+    Boolean login(String username,String password) throws Exception;
+
+    Boolean logout() throws Exception;
 }

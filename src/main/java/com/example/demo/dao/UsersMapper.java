@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.domain.Users;
+import com.example.demo.domain.vo.UsersVo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -14,5 +15,5 @@ public interface UsersMapper {
 
     Users get(String id);
 
-    Users getByName(String username);
+    UsersVo getByName(String username);
 }

@@ -7,18 +7,24 @@
         <result column="password" property="password"/>
     </resultMap>
 
+    <resultMap id="result_usersVo" type="com.example.demo.domain.vo.UsersVo">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
     <sql id="Base_users_List">
 		id, username, password
 	</sql>
 
-    <select id="findByName" resultMap="result_users" parameterType="java.lang.String">
+    <select id="getByName" resultMap="result_usersVo" parameterType="java.lang.String">
         select
         <include refid="Base_users_List"/>
         from users
         where username = #{username}
     </select>
 
-    <select id="findById" resultMap="result_users" parameterType="java.lang.String">
+    <select id="get" resultMap="result_users" parameterType="java.lang.String">
         select
         <include refid="Base_users_List"/>
         from users
@@ -26,15 +32,15 @@
     </select>
 
 
-    <insert id="insertUsers" parameterType="com.example.demo.domain.Users">
+    <insert id="add" parameterType="com.example.demo.domain.Users">
         insert into users (id,username,password) value (#{id},#{username},#{password})
     </insert>
 
-    <update id="updateById" parameterType="com.example.demo.domain.Users">
+    <update id="update" parameterType="com.example.demo.domain.Users">
         update users set username=#{username},password=#{password} where id=#{id}
     </update>
 
-    <delete id="deleteById" parameterType="java.lang.String">
+    <delete id="delete" parameterType="java.lang.String">
         delete from users where id =#{id}
     </delete>
 </mapper>

@@ -5,6 +5,8 @@ import lombok.Data;
 import org.unbescape.xml.XmlEscape;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -35,6 +37,16 @@ public class JsonResult implements Serializable {
      * 请求失败
      */
     private static final Integer FAIL = 1;
+
+    /**
+     * 未登录
+     */
+    private static final Integer UNAUTH = 2;
+
+    /**
+     * 时间戳
+     */
+    private Long timestamp = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli();
 
     public JsonResult() {
     }
@@ -77,5 +89,9 @@ public class JsonResult implements Serializable {
 
     public static JsonResult fail(String message) {
         return new JsonResult(FAIL,message,null);
+    }
+
+    public static JsonResult unauth(String message) {
+        return new JsonResult(UNAUTH,message,null);
     }
 }
