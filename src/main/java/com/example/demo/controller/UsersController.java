@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Users;
 import com.example.demo.domain.vo.UsersVo;
+import com.example.demo.result.JsonResult;
 import com.example.demo.service.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,13 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author AilingBoy
  * https://github.com/AilingBoy
  * @version 1.0
  * @date 2020/5/12 22:38
  */
-@Controller
+@RestController
 @Api(value = "用户",tags = "用户管理")
 public class UsersController {
 
@@ -33,22 +36,20 @@ public class UsersController {
 
     @ApiOperation("用户登陆")
     @PostMapping("/login")
-    public String login(String username, String password) throws Exception {
-        us.login(username, password);
-        return "redirect:/";
+    public JsonResult login(String username, String password) throws Exception {
+        return JsonResult.data(us.login(username, password));
     }
 
     @ApiOperation("用户登出")
     @PostMapping("/logout")
-    public String logout() throws Exception {
-        us.logout();
-        return "index";
+    public JsonResult logout(HttpServletRequest request) throws Exception {
+        us.logout(request);
+        return JsonResult.data();
     }
 
     @ApiOperation("添加用户")
     @PostMapping("/users")
-    public String add(Users u) throws Exception {
-        us.insertUsers(u);
-        return "index";
+    public JsonResult add(Users u) throws Exception {
+        return JsonResult.data(us.insertUsers(u));
     }
 }

@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Users;
+import com.example.demo.domain.vo.UsersVo;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public interface UsersService {
@@ -16,7 +19,7 @@ public interface UsersService {
 
     Boolean getByName(String username) throws Exception;
 
-    Boolean login(String username,String password) throws Exception;
+    UsersVo login(String username, String password) throws Exception;
 
-    Boolean logout() throws Exception;
+    Boolean logout(HttpServletRequest request) throws Exception;
 }

@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 @Service
@@ -61,7 +62,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Boolean login(String username, String password) throws Exception{
+    public UsersVo login(String username, String password) throws Exception{
         UsersVo u = um.getByName(username);
         if(u==null){
 
@@ -72,21 +73,21 @@ public class UsersServiceImpl implements UsersService {
         }
         String key=u.getId()+"_"+IdUtil.simpleUUID();
         u.setToken(key);
-        contextService.setUser(u);
         String oldKey=redisService.get(u.getId(),String.class);
         if(oldKey!=null){
             redisService.remove(oldKey);
         }
         redisService.put(u.getId(),key);
         redisService.put(key,u);
-        return Boolean.TRUE;
+        return u;
     }
 
     @Override
-    public Boolean logout() throws Exception{
-        UsersVo usersVo = contextService.get();
+    public Boolean logout(HttpServletRequest request) throws Exception{
+        String token = request.getHeader("token");
+        UsersVo usersVo = redisService.get(token, UsersVo.class);
+        redisService.remove(token);
         redisService.remove(usersVo.getId());
-        redisService.remove(usersVo.getToken());
         return Boolean.TRUE;
     }
 }
