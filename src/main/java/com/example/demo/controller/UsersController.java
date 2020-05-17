@@ -43,8 +43,7 @@ public class UsersController {
     @ApiOperation("用户登出")
     @PostMapping("/logout")
     public JsonResult logout(HttpServletRequest request) throws Exception {
-        us.logout(request);
-        return JsonResult.data();
+        return JsonResult.data(us.logout(request));
     }
 
     @ApiOperation("添加用户")
