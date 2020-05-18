@@ -15,4 +15,19 @@ public class UsersVo extends Users {
      * 校验码
      */
     private String token;
+
+    public UsersVo(){}
+
+    public UsersVo(String token){
+        this.token=token;
+    }
+
+    public UsersVo(String username,String password){
+        super(username, password);
+    }
+
+    @Override
+    public String toString(){
+        return super.getUsername()+super.getPassword()+this.getToken();
+    }
 }

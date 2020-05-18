@@ -21,5 +21,5 @@ public interface UsersService {
 
     UsersVo login(String username, String password) throws Exception;
 
-    Boolean logout(HttpServletRequest request) throws Exception;
+    Boolean logout() throws Exception;
 }

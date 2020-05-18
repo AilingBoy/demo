@@ -30,7 +30,6 @@ public class RedisService {
     public Boolean put(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, objectMapper.writeValueAsString(value));
-            log.info(objectMapper.writeValueAsString(value));
             return Boolean.TRUE;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -39,7 +38,7 @@ public class RedisService {
     }
 
     /**
-     * Redis存储
+     * Redis存储,设置有效时间
      *
      * @param key
      * @param value

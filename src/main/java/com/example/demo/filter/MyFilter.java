@@ -1,5 +1,8 @@
 package com.example.demo.filter;
 
+import com.example.demo.domain.Users;
+import com.example.demo.domain.vo.UsersVo;
+import com.example.demo.service.redis.ContextService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +21,9 @@ import java.util.*;
 @WebFilter(urlPatterns = "/*")
 @Slf4j
 public class MyFilter implements Filter {
+
+
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -26,16 +32,9 @@ public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-//        if (request.getMethod().toUpperCase().equals("POST"))
-//            filterChain.doFilter(servletRequest,servletResponse);
-//        else
         Map<String, String[]> map = new HashMap<>(request.getParameterMap());
         removeEmptyParam(map);
         request=new MyRequestWrapper(request,map);
-//        Enumeration<String> parameterNames = request.getParameterNames();
-//        while(parameterNames.hasMoreElements()){
-//            log.info(parameterNames.nextElement());
-//        }
         filterChain.doFilter(request,servletResponse);
     }
 

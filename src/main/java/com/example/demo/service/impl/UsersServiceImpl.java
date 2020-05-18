@@ -1,12 +1,14 @@
 package com.example.demo.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import com.alibaba.fastjson.JSON;
 import com.example.demo.dao.UsersMapper;
 import com.example.demo.domain.Users;
 import com.example.demo.domain.vo.UsersVo;
 import com.example.demo.service.UsersService;
 import com.example.demo.service.redis.ContextService;
 import com.example.demo.service.redis.RedisService;
+import com.example.demo.utils.AesUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,7 @@ public class UsersServiceImpl implements UsersService {
         if(!u.getPassword().equals(password)){
             throw new Exception("密码错误");
         }
-        String key=u.getId()+"_"+IdUtil.simpleUUID();
+        String key=IdUtil.simpleUUID()+u.getId();
         u.setToken(key);
         String oldKey=redisService.get(u.getId(),String.class);
         if(oldKey!=null){
@@ -83,11 +85,10 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Boolean logout(HttpServletRequest request) throws Exception{
-        String token = request.getHeader("token");
-        UsersVo usersVo = redisService.get(token, UsersVo.class);
-        redisService.remove(token);
+    public Boolean logout() throws Exception{
+        UsersVo usersVo = contextService.get();
         redisService.remove(usersVo.getId());
+        redisService.remove(usersVo.getToken());
         return Boolean.TRUE;
     }
 }
