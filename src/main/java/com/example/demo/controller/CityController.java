@@ -24,7 +24,8 @@ public class CityController {
     private static final Logger logger= LoggerFactory.getLogger(CityController.class);
     @ApiOperation("列表展示")
     @GetMapping(value = {"/city", "/"})
-    public JsonResult findall() {
+    public JsonResult findAll(@RequestParam(value = "pageSize",required = false)Integer pageSize,
+                              @RequestParam(value = "pageNum",required = false)Integer pageNum) {
         List<City> list = cs.findAll();
         return JsonResult.data(list);
     }

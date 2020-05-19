@@ -13,7 +13,7 @@ public class PageHelpHandler extends BaseHandler {
     @Override
     public Boolean getResult(HttpServletRequest request, HttpServletResponse response) {
         String requestUrl = request.getRequestURI();
-        if (!requestUrl.toLowerCase().endsWith("/search")) {
+        if (!requestUrl.equals("/")&&!requestUrl.equals("/city")) {
             return Boolean.TRUE;
         }
         Integer pageSize;
