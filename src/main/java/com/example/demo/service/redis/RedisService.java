@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 
+/**
+ * @author AilingBoy
+ */
 @Service
 @Slf4j
 public class RedisService {

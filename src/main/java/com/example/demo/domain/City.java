@@ -4,6 +4,9 @@ import com.example.demo.base.BaseModel;
 import lombok.Data;
 
 
+/**
+ * @author AilingBoy
+ */
 @Data
 public class City extends BaseModel {
     private static final long serialVersionUID = 5565794179055362587L;

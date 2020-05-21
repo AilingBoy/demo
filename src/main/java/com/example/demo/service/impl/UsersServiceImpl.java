@@ -57,10 +57,11 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Boolean getByName(String username) throws Exception{
         UsersVo u=um.getByName(username);
-        if(u!=null)
+        if(u!=null) {
             return Boolean.FALSE;
-        else
+        } else {
             return Boolean.TRUE;
+        }
     }
 
     @Override

@@ -3,6 +3,9 @@ package com.example.demo.domain;
 import com.example.demo.base.BaseModel;
 import lombok.Data;
 
+/**
+ * @author AilingBoy
+ */
 @Data
 public class Users extends BaseModel {
 

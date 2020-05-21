@@ -30,8 +30,9 @@ public class MyRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String getParameter(String name) {
         String[] vs = params.get(name);
-        if (vs == null || vs.length < 1)
+        if (vs == null || vs.length < 1) {
             return null;
+        }
         return vs[0];
     }
 
@@ -43,8 +44,9 @@ public class MyRequestWrapper extends HttpServletRequestWrapper {
     @Override
     public String[] getParameterValues(String name) {
         String[] vs = params.get(name);
-        if (vs == null || vs.length < 1)
+        if (vs == null || vs.length < 1) {
             return null;
+        }
         return vs;
     }
 }
